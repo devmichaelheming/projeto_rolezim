@@ -12,10 +12,8 @@ import {
 import firebase from "../../services/firebase";
 
 import styles from "./style";
-import logo from "../../assets/logo.png";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Fragment } from 'react';
 
 export default function SignIn({ navigation }) {
     const [email, setEmail] = useState("");
@@ -50,7 +48,6 @@ export default function SignIn({ navigation }) {
         >
             <View style={styles.headerDescription}>
                 <Text style={styles.title}>ROLEZIM</Text>
-                <Text style={styles.subtitle}>Facilitando na sua procura/divulgação de eventos!</Text>
             </View>
             
             <View style={styles.groupButtons}>

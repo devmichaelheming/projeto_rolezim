@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: theme.colors.primary,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
 
         paddingTop: Platform.OS === "ios" ? 0 : 50,
     },
@@ -14,26 +14,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingHorizontal: 15,
-        marginBottom: 100,
+        marginTop: 30,
     },
     title: {
         fontSize: 56,
         fontFamily: theme.fonts.title700,
         color: "#FFFFFF",
     },
-    subtitle: {
-        fontSize: 16,
-        textAlign: 'center',
-        fontFamily: theme.fonts.text400,
-        color: "#FFFFFF",
-    },
     groupButtons: {
         width: '100%',
-        height: '75%',
+        height: 500,
+        position: 'absolute',
         bottom: 0,
         backgroundColor: '#FFFFFF',
         borderTopLeftRadius: 100,
-        borderTopRightRadius: 100,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -42,7 +36,7 @@ const styles = StyleSheet.create({
         padding: 10,
         height: 50,
         borderBottomWidth: 1,
-        borderBottomColor: theme.colors.primary,
+        borderBottomColor: theme.colors.highlight,
         marginLeft: "auto",
         marginRight: "auto",
         color: "#4d5156",
@@ -70,12 +64,12 @@ const styles = StyleSheet.create({
     buttonLogin: {
         width: '80%',
         height: 60,
-        backgroundColor: '#5E17EB',
+        backgroundColor: theme.colors.primary,
 
         justifyContent: "center",
         alignItems: "center",
 
-        borderRadius: 25,
+        borderRadius: 8,
 
         marginTop: 30,
     },
