@@ -17,7 +17,7 @@ export default function Home({ navigation }) {
             <Logo>Rolezim</Logo>
 
             <GroupButtons>
-                <Button title="SignInn" action={()=> navigation.navigate("SignIn")} />
+                <Button title="SignIn" action={()=> navigation.navigate("SignIn")} />
 
                 <Button title="SignUp" action={()=> navigation.navigate("SignUp")} />
             </GroupButtons>
