@@ -4,11 +4,10 @@ import {
     Container,
     Logo,
     GroupButtons,
-    SignIn,
-    SignUp,
 } from './style'
 
 import Button from "../../components/Button";
+import { theme } from '../../global/styles/theme';
 
 export default function Home({ navigation }) {
 
@@ -17,9 +16,19 @@ export default function Home({ navigation }) {
             <Logo>Rolezim</Logo>
 
             <GroupButtons>
-                <Button title="SignIn" action={()=> navigation.navigate("SignIn")} />
+                <Button
+                    title="SignIn"
+                    action={()=> navigation.navigate("SignIn")}
+                    bg="#FFF"
+                    color={theme.colors.primary}
+                />
 
-                <Button title="SignUp" action={()=> navigation.navigate("SignUp")} />
+                <Button
+                    title="SignUp"
+                    action={()=> navigation.navigate("SignUp")}
+                    bg="#FFF"
+                    color={theme.colors.primary}
+                />
             </GroupButtons>
         </Container>
     )

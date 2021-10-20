@@ -1,17 +1,26 @@
 import React, { useState } from 'react'
-import {
-    View,
-    Text,
-    KeyboardAvoidingView,
-    TextInput,
-    TouchableOpacity,
-    Platform,
-} from 'react-native'
+import { Platform } from 'react-native'
 
 import firebase from '../../services/firebase'
 
-import styles from './style'
+import {
+    Container,
+    Header,
+    Title,
+    Body,
+    Input,
+    ContentAlert,
+    WarningAlert,
+    Registration,
+    BgOne,
+    BgTwo,
+    Logo,
+    LinkSignIn
+} from './style'
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { theme } from '../../global/styles/theme';
+import Button from "../../components/Button";
 
 export default function SignUp({ navigation }) {
     const [email, setEmail] = useState("");
@@ -25,8 +34,8 @@ export default function SignUp({ navigation }) {
           navigation.navigate("Task", { idUser: user.uid })
         })
         .catch((error) => {
-            if (password.length <= 6) {
-                setErrorRegister("Use 6 caracteres ou mais para sua senha.") 
+            if (password.length <= 8) {
+                setErrorRegister("Use 8 caracteres ou mais para sua senha.") 
             }
             let errorCode = error.code;
             let errorMessage = error.message;
@@ -34,67 +43,72 @@ export default function SignUp({ navigation }) {
     }
 
     return (
-        <KeyboardAvoidingView
+        <Container
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
         >
-            <Text style={styles.title}>Criar uma nova conta</Text>
-            <TextInput
-                style={styles.input}
-                placeholder="Insira o seu e-mail..."
-                type="text"
-                onChangeText={(text) => setEmail(text)}
-                value={email}
-            />
-            <TextInput
-                style={styles.input}
-                secureTextEntry={true}
-                placeholder="Insira a sua senha..."
-                type="text"
-                onChangeText={(text) => setPassword(text)}
-                value={password}
-            />
-            {errorRegister
-            ?
-                <View style={styles.contentAlert}>
-                    <MaterialCommunityIcons
-                    name="alert-circle"
-                    size={24}
-                    color="#bdbdbd"
+            <BgOne>
+                <Logo>
+                    ROLEZIM
+                </Logo>
+            </BgOne>
+
+            <Body>
+                <Header>
+                    <Title>Sign Up</Title>
+                </Header>
+
+                <Input
+                    placeholder="Enter your e-mail"
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                />
+                <Input
+                    secureTextEntry={true}
+                    placeholder="Enter your password"
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                />
+                {errorRegister
+                ?
+                    <ContentAlert>
+                        <MaterialCommunityIcons
+                        name="alert-circle"
+                        size={24}
+                        color={theme.colors.danger}
+                        />
+                        <WarningAlert>{errorRegister}</WarningAlert>
+                    </ContentAlert>
+                :
+                    <></>
+                }
+
+                {email === "" || password === ""
+                ?
+                    <Button
+                        title="Sign Up"
+                        status={true}
+                        bg={theme.colors.primary}
+                        color="#FFF"
                     />
-                    <Text style={styles.warningAlert}>{errorRegister}</Text>
-                </View>
-            :
-                <View/>
-            }
+                :
+                    <Button
+                        title="Sign Up"
+                        action={register}
+                        bg={theme.colors.primary}
+                        color="#FFF"
+                    />
+                }
+                <Registration>
+                    Already registered?
+                    <LinkSignIn
+                        onPress={()=> navigation.navigate("SignIn")}
+                    >
+                    Sign In!
+                    </LinkSignIn> 
+                </Registration>
+            </Body>
+            <BgTwo />
 
-            {email === "" || password === ""
-            ?
-                <TouchableOpacity
-                    disabled={true}
-                    style={styles.buttonRegister}
-                >
-                    <Text style={styles.textButtonRegister}>Cadastrar</Text>
-                </TouchableOpacity>
-            :
-                <TouchableOpacity
-                    onPress={register}
-                    style={styles.buttonRegister}
-                >
-                    <Text style={styles.textButtonRegister}>Cadastrar</Text>
-                </TouchableOpacity>
-            }
-            <Text style={styles.registration}>
-                Já é cadastrado?
-                <Text
-                    style={styles.linkLogin}
-                    onPress={()=> navigation.navigate("login")}
-                >
-                    entrar
-                </Text> 
-            </Text>
-            <View style={{height:100}}/>
-
-        </KeyboardAvoidingView>
+        </Container>
     )
 }
