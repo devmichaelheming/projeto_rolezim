@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react'
+import { Platform } from 'react-native'
+
 import {
-    View,
-    Text,
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    TextInput,
-    TouchableOpacity
-} from 'react-native'
+    Container,
+    Header,
+    Title,
+    Body,
+    Input,
+    ContentAlert,
+    WarningAlert,
+    Registration,
+    BgOne,
+    BgTwo,
+    Logo,
+    LinkSignUp,
+    AlternateLogin,
+    SignInGoogle,
+    SignInFacebook
+} from "./style";
 
 import firebase from "../../services/firebase";
 
-import styles from "./style";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { theme } from '../../global/styles/theme';
+
+import Button from "../../components/Button";
 
 export default function SignIn({ navigation }) {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [errorLogin, SetErrorLogin] = useState("");
-
+    const [errorLogin, setErrorLogin] = useState(false);
+    
     const login = () => {
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -42,71 +54,89 @@ export default function SignIn({ navigation }) {
     }, []);
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
+        <Container
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-            <View style={styles.headerDescription}>
-                <Text style={styles.title}>ROLEZIM</Text>
-            </View>
+            <BgOne>
+                <Logo>
+                    LOGO
+                </Logo>
+            </BgOne>
             
-            <View style={styles.groupButtons}>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Insira o seu e-mail..."
-                    type="text"
+            <Body>
+                <Header>
+                    <Title>Sign In</Title>
+                </Header>
+
+                <Input
+                    placeholder="Enter your e-mail"
                     onChangeText={(text) => setEmail(text)}
                     value={email}
                 />
-                <TextInput
-                    style={styles.input}
+                <Input
                     secureTextEntry={true}
-                    placeholder="Insira a sua senha..."
-                    type="text"
+                    placeholder="Enter your password"
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                 />
                 {errorLogin === true
                 ?
-                    <View style={styles.contentAlert}>
+                    <ContentAlert>
                         <MaterialCommunityIcons
                         name="alert-circle"
                         size={24}
-                        color="#bdbdbd"
+                        color={theme.colors.danger}
                         />
-                        <Text style={styles.warningAlert}>Senha ou e-mail incorretos!</Text>
-                    </View>
+                        <WarningAlert>Incorrect password or email!</WarningAlert>
+                    </ContentAlert>
                 :
-                    <View/>
+                    <></>
                 }
 
                 {email === "" || password === ""
                 ?
-                    <TouchableOpacity
-                        disabled={true}
-                        style={styles.buttonLogin}
-                    >
-                        <Text style={styles.textButtonLogin}>Entrar</Text>
-                    </TouchableOpacity>
+                    <Button
+                        title="Sign In"
+                        status={true}
+                        bg={theme.colors.primary}
+                        color="#FFF"
+                    />
                 :
-                    <TouchableOpacity
-                        onPress={login}
-                        style={styles.buttonLogin}
-                    >
-                        <Text style={styles.textButtonLogin}>Entrar</Text>
-                    </TouchableOpacity>
+                    <Button
+                        title="Sign In"
+                        action={login}
+                        bg={theme.colors.primary}
+                        color="#FFF"
+                    />
                 }
-                <Text style={styles.registration}>
-                    Não tem uma conta?
-                    <Text
-                        style={styles.linkSubscribe}
+                <Registration>
+                    Don't have an account?
+                    <LinkSignUp
                         onPress={()=> navigation.navigate("SignUp")}
                     >
-                    Cadastre-se agora!
-                    </Text> 
-                </Text>
-            </View>
+                    Register now!
+                    </LinkSignUp> 
+                </Registration>
 
-        </KeyboardAvoidingView>
+                <AlternateLogin>
+                    <SignInGoogle>
+                        <MaterialCommunityIcons
+                            name="google"
+                            size={28}
+                            color="#FFF"
+                        />
+                    </SignInGoogle>
+                    <SignInFacebook>
+                        <MaterialCommunityIcons
+                            name="facebook"
+                            size={28}
+                            color="#FFF"
+                        />
+                    </SignInFacebook>
+                </AlternateLogin>
+            </Body>
+            <BgTwo />
+
+        </Container>
     )
 }

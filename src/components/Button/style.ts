@@ -3,8 +3,8 @@ import { theme } from '../../global/styles/theme';
 
 export const Btn = styled.TouchableOpacity`
     background-color: #FFFFFF;
-    width: 90%;
-    height: 60px;
+    width: 80%;
+    height: 50px;
     align-items: center;
     justify-content: center;
     border-radius: 8px;

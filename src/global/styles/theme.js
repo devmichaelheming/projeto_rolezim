@@ -1,6 +1,6 @@
 export const theme = {
   colors: {
-    primary: '#B42B51',
+    primary: '#9147FF',
     
     secondary100: '#0A1033',
     secondary90: '#0D133D',    
@@ -14,8 +14,8 @@ export const theme = {
     overlay: 'rgba(0,0,0,0.7)',
     highlight: '#ABB1CC',
     heading: '#DDE3F0',
-    line: '#991F36',
-    on: '#32BD50',
+    danger: '#842029',
+    success: '#0f5132',
   },
 
   fonts: {

@@ -5,16 +5,16 @@ import { theme } from '../../global/styles/theme';
 export const Container = styled.View`
     flex: 1;
     width: 100%;
-    background: ${theme.colors.primary};
-    padding-top: ${getStatusBarHeight()}px;
+    background-color: ${theme.colors.primary};
     justify-content: center;
     align-items: center;
+    padding-top: ${getStatusBarHeight()}px;
 `;
 
 export const Logo = styled.Text`
     font-size: 60px;
     font-family: ${theme.fonts.title700};
-    color: #FFFFFF;
+    color: #FFF;
 `;
 
 export const GroupButtons = styled.View`
